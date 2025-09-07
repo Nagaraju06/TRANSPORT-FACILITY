@@ -38,6 +38,12 @@
                 <span class="required" *ngIf="newRide.controls['vacantSeats']?.touched && newRide.controls['vacantSeats']?.hasError('required')">
                     Please Enter Vacant Seats.
                 </span>
+                <span class="required" *ngIf="newRide.controls['vacantSeats']?.touched && newRide.controls['vacantSeats']?.hasError('minlength')">
+                    Please Enter atleats one seat
+                </span>
+                <span class="required" *ngIf="newRide.controls['vacantSeats']?.touched && newRide.controls['vacantSeats']?.hasError('maxLength')">
+                    Please Enter not more than 3.
+                </span>
                 <span class="required" *ngIf="newRide.controls['vacantSeats']?.touched && newRide.controls['vacantSeats']?.hasError('numbersOnly')">
                     Please enter vacant seats in number.
                 </span>

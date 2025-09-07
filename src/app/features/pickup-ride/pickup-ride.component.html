@@ -1,0 +1,48 @@
+<div class="pickup-container">
+  <div class="heading-container">
+    <h2>Available Rides</h2>
+    <div>
+      <button type="submit" class="add-new-ride" (click)="onRouterAddNewRide()">Add New Ride</button>
+    </div>
+  </div>
+  <div>
+    <input type="text" class="form-control" placeholder="Search by vechile type" (input)="searchVechileType($event)"  />
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Vehicle Type</th>
+        <th>Vehicle No</th>
+        <th>Seats Left</th>
+        <th>Time</th>
+        <th>Pickup</th>
+        <th>Destination</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filterdData; let i = index">
+        <td>{{ item.employeeID }}</td>
+        <td>{{ item.vehicleType }}</td>
+        <td>{{ item.vehicleNo }}</td>
+        <td>{{ item.vacantSeats }}</td>
+        <td>{{ item.time | customTime }}</td>
+        <td>{{ item.pickupPoint }}</td>
+        <td>{{ item.destination }}</td>
+        <td>
+          <ng-container *ngIf="showEmployeeIdInput === i; else showButton">
+            <input type="text"
+                 class="form-control"
+                 placeholder="Enter Employee ID"
+                 (keyup.enter)="bookRide(i)"
+                 [(ngModel)]="employeeID[i]">
+          </ng-container>
+          <ng-template #showButton>
+            <button type="submit" class="btn-primary" (click)="showEmployeeInput(i)" [disabled]="item.vacantSeats === 0">book seat</button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

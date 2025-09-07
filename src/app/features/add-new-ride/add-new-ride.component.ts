@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CustomValidators } from 'src/app/Shared/custom.validators';
 import { RideService } from 'src/app/Shared/ride.service';
 
@@ -11,13 +12,18 @@ import { RideService } from 'src/app/Shared/ride.service';
 })
 export class AddNewRideComponent implements OnInit {
   newRide!: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private rideService: RideService){}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private toastService: ToastrService
+    
+  ){}
   ngOnInit(): void {
     this.newRide = this.fb.group({
       employeeID: ['', [Validators.required, CustomValidators.numbersOnly]],
       vehicleType: ['Car', Validators.required],
       vehicleNo: ['', [Validators.required, CustomValidators.vehicleNo]],
-      vacantSeats: ['', [Validators.required, CustomValidators.numbersOnly]],
+      vacantSeats: [1, [Validators.required, CustomValidators.numbersOnly, Validators.maxLength(3)]],
       time: ['', Validators.required],
       pickupPoint: ['', [Validators.required, CustomValidators.alphabetsOnly]],
       destination: ['', [Validators.required, CustomValidators.alphabetsOnly]]
@@ -26,13 +32,15 @@ export class AddNewRideComponent implements OnInit {
 
   addRide() {
     if(this.newRide.invalid) {
-      alert('Please enter all mandatory fields');
+      this.toastService.error('Please enter all mandatory fields');
     } else {
       const result = this.newRide.value;
-      this.newRide.reset();
-      this.rideService.newRide(result);
-      localStorage.setItem('rides', JSON.stringify(result));
+       const existingRides = JSON.parse(localStorage.getItem('rides') || '[]');
+       existingRides.push(result);
+       this.toastService.success('Ride Created Successfully');
+      localStorage.setItem('rides', JSON.stringify(existingRides));
       this.router.navigate(['/pickup-ride']);
+      this.newRide.reset();
       console.log(this.newRide.value);
     }
   }
