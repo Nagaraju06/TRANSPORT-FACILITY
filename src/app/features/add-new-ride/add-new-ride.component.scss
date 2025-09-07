@@ -1,0 +1,30 @@
+.container {
+  max-width: fit-content;
+  margin: 4rem auto;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  & .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        & .form-group {
+            display: flex;
+            flex-direction: column;
+        } 
+    }
+    & .add-ride {
+        background-color: blue;
+        border: none;
+        height: 2.5rem;
+        width: 100%;
+        color: #FFFFFF;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        text-transform: capitalize;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+}
+

@@ -1,0 +1,75 @@
+<div class="container">
+    <form [formGroup]="newRide" (ngSubmit)="addRide()">
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label" for="employeeID">Employee ID</label>
+                <input type="text" placeholder="Enter Employee ID" formControlName="employeeID" class="form-control" />
+                <span class="required" *ngIf="newRide.controls['employeeID']?.touched && newRide.controls['employeeID']?.hasError('required')">
+                    Please Enter Employee ID.
+                </span>
+                <span class="required" *ngIf="newRide.controls['employeeID']?.touched && newRide.controls['employeeID']?.hasError('numbersOnly')">
+                    Employee ID must be numbers only.
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="vehicleType">Vehicle Type</label>
+                <select formControlName="vehicleType" class="form-select">
+                    <option value="Car">Car</option>
+                    <option value="Bike">Bike</option>
+                </select>
+                <span class="required" *ngIf="newRide.controls['vehicleType']?.touched && newRide.controls['vehicleType']?.hasError('required')">
+                    Select a vechile
+                </span>
+
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="vehicleNo">Vehicle No</label>
+                <input type="text" class="form-control" placeholder="Enter Vehicle No" formControlName="vehicleNo" />
+                <span class="required" *ngIf="newRide.controls['vehicleNo']?.touched && newRide.controls['vehicleNo']?.hasError('required')">
+                    Please Enter Vechile Number.
+                </span>
+                <span class="required" *ngIf="newRide.controls['vehicleNo']?.touched && newRide.controls['vehicleNo']?.hasError('vehicleNo')">
+                    Please enter valid vechile number
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="vacantSeats">Vacant Seats</label>
+                <input type="text" class="form-control" placeholder="Enter Vacant Seats" formControlName="vacantSeats">
+                <span class="required" *ngIf="newRide.controls['vacantSeats']?.touched && newRide.controls['vacantSeats']?.hasError('required')">
+                    Please Enter Vacant Seats.
+                </span>
+                <span class="required" *ngIf="newRide.controls['vacantSeats']?.touched && newRide.controls['vacantSeats']?.hasError('numbersOnly')">
+                    Please enter vacant seats in number.
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="time">Time</label>
+                <input type="time" class="form-control" placeholder="Select Time" formControlName="time">
+                <span class="required" *ngIf="newRide.controls['time']?.touched && newRide.controls['time']?.hasError('required')">
+                    Please Enter Time
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="pickupPoint">Pickup Point</label>
+                <input type="text" class="form-control" formControlName="pickupPoint" placeholder="Enter Pick Up Point">
+                <span class="required" *ngIf="newRide.controls['pickupPoint']?.touched && newRide.controls['pickupPoint']?.hasError('required')">
+                    Please Enter Pickup Point.
+                </span>
+                <span class="required" *ngIf="newRide.controls['pickupPoint']?.touched && newRide.controls['pickupPoint']?.hasError('alphabetsOnly')">
+                    Please enter valid characters
+                </span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="destination">Destination</label>
+                <input type="text" class="form-control" placeholder="Enter Destination" formControlName="destination">
+                <span class="required" *ngIf="newRide.controls['destination']?.touched && newRide.controls['destination']?.hasError('required')">
+                    Please Enter Destination Point.
+                </span>
+                <span class="required" *ngIf="newRide.controls['destination']?.touched && newRide.controls['destination']?.hasError('alphabetsOnly')">
+                    Please enter valid characters
+                </span>
+            </div>
+        </div>
+        <button type="submit" class="add-ride">Add Ride</button>
+    </form>
+</div>
